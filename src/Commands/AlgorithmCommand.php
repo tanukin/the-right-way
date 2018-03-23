@@ -8,7 +8,7 @@ use Algorithm\Exceptions\FileException;
 use Algorithm\Exceptions\GraphException;
 use Algorithm\Exceptions\NotFoundFileException;
 use Algorithm\Graph\Graph;
-use Algorithm\Graph\GraphJSON;
+use Algorithm\Graph\GraphJson;
 use Algorithm\GraphService;
 use Algorithm\Vertices\Vertices;
 use Symfony\Component\Console\Command\Command;
@@ -38,7 +38,7 @@ class AlgorithmCommand extends Command
             if (empty($input->getArgument('filename')))
                 throw new FileException('No filename received.');
 
-            $graphJSON = new GraphJSON($this->getContent($input->getArgument('filename')));
+            $graphJSON = new GraphJson($this->getContent($input->getArgument('filename')));
             $graph = new Graph($graphJSON->decode());
             $edge = new Edge();
             $vertices = new Vertices($graph->countVertex());

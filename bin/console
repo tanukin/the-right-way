@@ -1,0 +1,12 @@
+#!/usr/bin/env php
+<?php
+
+use Algorithm\Commands\AlgorithmCommand;
+use Symfony\Component\Console\Application;
+
+require __DIR__ . "/../vendor/autoload.php";
+
+
+$application = new Application();
+$application->add(new AlgorithmCommand());
+$application->run();

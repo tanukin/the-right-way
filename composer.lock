@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e4500130518d90e7f5723a57fcb5a975",
-    "content-hash": "21b95977edcdeca9cb1f45f25df88422",
+    "hash": "9cd971ab6997fa6678b8f013722dd9e0",
+    "content-hash": "7546537107381989d53cb3c518db3f91",
     "packages": [
         {
             "name": "symfony/console",
-            "version": "v4.0.6",
+            "version": "v4.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "555c8dbe0ae9e561740451eabdbed2cc554b6a51"
+                "reference": "aad9a6fe47319f22748fd764f52d3a7ca6fa6b64"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/555c8dbe0ae9e561740451eabdbed2cc554b6a51",
-                "reference": "555c8dbe0ae9e561740451eabdbed2cc554b6a51",
+                "url": "https://api.github.com/repos/symfony/console/zipball/aad9a6fe47319f22748fd764f52d3a7ca6fa6b64",
+                "reference": "aad9a6fe47319f22748fd764f52d3a7ca6fa6b64",
                 "shasum": ""
             },
             "require": {
@@ -73,7 +73,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2018-02-26 15:55:47"
+            "time": "2018-04-03 05:24:00"
         },
         {
             "name": "symfony/polyfill-mbstring",

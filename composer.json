@@ -1,20 +1,20 @@
 {
-  "name": "anikin-elets/dijkstra-algorithm",
-  "description": "The Dijkstra algorithm is implemented to solve the traveling salesman problem.",
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Anikin Evgenij",
-      "email": "anikin-elets@yandex.ru"
+    "name": "anikin-elets/php-the-right-way",
+    "description": "Bring the project in accordance with the requirements of PHP. right way.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Anikin Evgenij",
+            "email": "anikin-elets@yandex.ru"
+        }
+    ],
+    "require": {
+        "php": "~7.1",
+        "symfony/console": "^4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Algorithm\\": "src"
+        }
     }
-  ],
-  "require": {
-    "php": "~7.1",
-    "symfony/console": "^4.0"
-  },
-  "autoload": {
-    "psr-4": {
-      "Algorithm\\":"src"
-    }
-  }
 }

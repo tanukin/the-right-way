@@ -11,12 +11,16 @@ use Algorithm\Interfaces\Core\VerticesInterface;
 
 class GraphService implements GraphServiceInterface
 {
-    private $loop = true;
+    private $_loop = true;
 
     /**
      * {@inheritdoc}
      */
-    public function getShortcut(GraphInterface $graph, VerticesInterface $vertices, EdgeInterface $edge): array
+    public function getShortcut(
+        GraphInterface $graph,
+        VerticesInterface $vertices,
+        EdgeInterface $edge
+    ): array
     {
         $vertices->setWeightVertices(0, 0);
 
@@ -29,7 +33,7 @@ class GraphService implements GraphServiceInterface
                 }
 
                 $edge->setDataEdge($vertices, $graph->getEdge($i));
-                $this->loop = true;
+                $this->_loop = true;
             }
             $this->isLoop();
             $vertices->getNextVertex();
@@ -43,11 +47,13 @@ class GraphService implements GraphServiceInterface
      */
     private function isLoop(): void
     {
-        if (!$this->loop) {
-            throw new VertexGraphException("Invalid graph. It's impossible to get to the vertex.");
+        if (!$this->_loop) {
+            throw new VertexGraphException(
+                "Invalid graph. It's impossible to get to the vertex."
+            );
         }
 
-        $this->loop = false;
+        $this->_loop = false;
     }
 
     private function getDataInArray(VerticesInterface $vertices): array

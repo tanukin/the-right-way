@@ -9,7 +9,7 @@ class Graph implements GraphInterface
     /**
      * @var array
      */
-    private $graph;
+    private $_graph;
 
     /**
      * Graph constructor.
@@ -18,7 +18,7 @@ class Graph implements GraphInterface
      */
     public function __construct(array $graph)
     {
-        $this->graph = $graph;
+        $this->_graph = $graph;
     }
 
     /**
@@ -26,7 +26,7 @@ class Graph implements GraphInterface
      */
     public function getGraph(): array
     {
-        return $this->graph;
+        return $this->_graph;
     }
 
     /**
@@ -34,7 +34,7 @@ class Graph implements GraphInterface
      */
     public function getEdge(int $index): array
     {
-        return array_column($this->graph, $index);
+        return array_column($this->_graph, $index);
     }
 
     /**
@@ -42,6 +42,6 @@ class Graph implements GraphInterface
      */
     public function countEdge(): int
     {
-        return count($this->graph[0]);
+        return count($this->_graph[0]);
     }
 }

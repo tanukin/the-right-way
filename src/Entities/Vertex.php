@@ -7,17 +7,17 @@ class Vertex
     /**
      * @var int
      */
-    private $from;
+    private $_from;
 
     /**
      * @var int
      */
-    private $to;
+    private $_to;
 
     /**
      * @var int
      */
-    private $weight;
+    private $_weight;
 
     /**
      * Vertex constructor.
@@ -27,8 +27,8 @@ class Vertex
      */
     public function __construct(int $from, int $weight)
     {
-        $this->from = $from;
-        $this->weight = $weight;
+        $this->_from = $from;
+        $this->_weight = $weight;
     }
 
     /**
@@ -36,7 +36,7 @@ class Vertex
      */
     public function getFrom(): int
     {
-        return $this->from;
+        return $this->_from;
     }
 
     /**
@@ -46,7 +46,7 @@ class Vertex
      */
     public function setTo(int $to): Vertex
     {
-        $this->to = $to;
+        $this->_to = $to;
 
         return $this;
     }
@@ -56,7 +56,7 @@ class Vertex
      */
     public function getWeight(): int
     {
-        return $this->weight;
+        return $this->_weight;
     }
 
     /**
@@ -66,10 +66,10 @@ class Vertex
      */
     public function setWeight(int $weight): int
     {
-        if ($this->weight > $weight || $this->weight == -1) {
-            $this->weight = $weight;
+        if ($this->_weight > $weight || $this->_weight == -1) {
+            $this->_weight = $weight;
         }
 
-        return $this->weight;
+        return $this->_weight;
     }
 }

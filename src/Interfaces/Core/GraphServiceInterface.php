@@ -15,5 +15,9 @@ interface GraphServiceInterface
      *
      * @throws GraphException
      */
-    public function getShortcut(GraphInterface $graph, VerticesInterface $vertices, EdgeInterface $edge): array;
+    public function getShortcut(
+        GraphInterface $graph,
+        VerticesInterface $vertices,
+        EdgeInterface $edge
+    ): array;
 }

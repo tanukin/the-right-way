@@ -15,11 +15,11 @@ class GraphController implements ControllerInterface
     /**
      * @var GraphServiceInterface
      */
-    private $graphService;
+    private $_graphService;
     /**
      * @var ResponseBuilderInterface
      */
-    private $responseBuilder;
+    private $_responseBuilder;
 
     /**
      * GraphController constructor.
@@ -27,19 +27,26 @@ class GraphController implements ControllerInterface
      * @param GraphServiceInterface    $graphService
      * @param ResponseBuilderInterface $responseBuilder
      */
-    public function __construct(GraphServiceInterface $graphService, ResponseBuilderInterface $responseBuilder)
+    public function __construct(
+        GraphServiceInterface $graphService,
+        ResponseBuilderInterface $responseBuilder
+    )
     {
-        $this->graphService = $graphService;
-        $this->responseBuilder = $responseBuilder;
+        $this->_graphService = $graphService;
+        $this->_responseBuilder = $responseBuilder;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function execute(GraphInterface $graph, VerticesInterface $vertices, EdgeInterface $edge): ResponseInterface
+    public function execute(
+        GraphInterface $graph,
+        VerticesInterface $vertices,
+        EdgeInterface $edge
+    ): ResponseInterface
     {
-        $data = $this->graphService->getShortcut($graph, $vertices, $edge);
+        $data = $this->_graphService->getShortcut($graph, $vertices, $edge);
 
-        return $this->responseBuilder->getResponse($data);
+        return $this->_responseBuilder->getResponse($data);
     }
 }

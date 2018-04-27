@@ -26,7 +26,8 @@ class AlgorithmCommand extends Command
         $this
             ->setName('app:Dijkstra-algorithm')
             ->setDescription(
-                'The Dijkstra algorithm finds the shortest path from one of the vertices of the graph to all the others.'
+                'The Dijkstra algorithm finds the shortest path'.
+                'from one of the vertices of the graph to all the others.'
             )
             ->addArgument(
                 'filename',
@@ -51,12 +52,21 @@ class AlgorithmCommand extends Command
             }
 
             $graphJson = new GraphJson();
-            $graphArray = $graphJson->decode($this->getContent($input->getArgument('filename')));
+            $graphArray = $graphJson->decode(
+                $this->getContent($input->getArgument('filename'))
+            );
 
             $controllerFactory = new ControllerFactory();
-            $controller = $controllerFactory->getController(new GraphService(), new ResponseBuilder());
+            $controller = $controllerFactory->getController(
+                new GraphService(),
+                new ResponseBuilder()
+            );
 
-            $response = $controller->execute(new Graph($graphArray), new Vertices(count($graphArray)), new Edge());
+            $response = $controller->execute(
+                new Graph($graphArray),
+                new Vertices(count($graphArray)),
+                new Edge()
+            );
 
         } catch (GraphException $e) {
             $io->error(sprintf('ERROR! %s', $e->getMessage()));

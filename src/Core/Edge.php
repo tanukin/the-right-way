@@ -26,7 +26,9 @@ class Edge implements EdgeInterface
         }
 
         if (empty($to)) {
-            throw new EdgeGraphException(sprintf("Invalid edge (%s)", implode(',', $edge)));
+            throw new EdgeGraphException(
+                sprintf("Invalid edge (%s)", implode(',', $edge))
+            );
         }
 
         if (empty($weight)) {

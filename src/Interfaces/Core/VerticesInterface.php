@@ -12,7 +12,10 @@ interface VerticesInterface
      *
      * @return VerticesInterface
      */
-    public function setWeightVertices(int $from, int $weight): VerticesInterface;
+    public function setWeightVertices(
+        int $from,
+        int $weight
+    ): VerticesInterface;
 
     /**
      * @return int

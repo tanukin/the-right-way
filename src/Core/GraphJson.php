@@ -42,7 +42,8 @@ class GraphJson implements ParseGraphInterface
             $exception = 'Syntax error, incorrect JSON';
             break;
         case JSON_ERROR_UTF8:
-            $exception = 'Incorrect UTF-8 characters, possibly incorrectly coded';
+            $exception = 'Incorrect UTF-8 characters,'.
+                'possibly incorrectly coded';
             break;
         default:
             $exception = 'Unknown error';

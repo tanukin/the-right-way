@@ -20,7 +20,8 @@ class ControllerFactory
     public function getController(
         GraphServiceInterface $graphService,
         ResponseBuilderInterface $responseBuilder
-    ): ControllerInterface {
+    ): ControllerInterface
+    {
         return new GraphController($graphService, $responseBuilder);
     }
 }

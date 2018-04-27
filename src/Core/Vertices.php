@@ -12,27 +12,27 @@ class Vertices implements VerticesInterface
     /**
      * @var array
      */
-    private $vertices = [];
+    private $_vertices = [];
 
     /**
      * @var int
      */
-    private $pathSum = 0;
+    private $_pathSum = 0;
 
     /**
      * @var int
      */
-    private $usedVertex = 0;
+    private $_usedVertex = 0;
 
     /**
      * @var int
      */
-    private $minWeight = 0;
+    private $_minWeight = 0;
 
     /**
      * @var int
      */
-    private $minToVertex = 0;
+    private $_minToVertex = 0;
 
 
     /**
@@ -43,7 +43,7 @@ class Vertices implements VerticesInterface
     public function __construct(int $countVertex)
     {
         for ($i = 0; $i < $countVertex; $i++) {
-            $this->vertices[$i] = new Vertex($i, -1);
+            $this->_vertices[$i] = new Vertex($i, -1);
         }
     }
 
@@ -53,11 +53,11 @@ class Vertices implements VerticesInterface
     public function setWeightVertices(int $from, int $weight): VerticesInterface
     {
         $vertex = $this->getVertex($from);
-        $weight = $vertex->setWeight($weight + $this->pathSum);
+        $weight = $vertex->setWeight($weight + $this->_pathSum);
 
-        if ($this->minWeight <= 0 || $this->minWeight >= $weight) {
-            $this->minWeight = $weight;
-            $this->minToVertex = $from;
+        if ($this->_minWeight <= 0 || $this->_minWeight >= $weight) {
+            $this->_minWeight = $weight;
+            $this->_minToVertex = $from;
         }
 
         return $this;
@@ -68,16 +68,16 @@ class Vertices implements VerticesInterface
      */
     public function getNextVertex(): int
     {
-        $vertex = $this->getVertex($this->usedVertex);
-        $vertex->setTo($this->minToVertex);
+        $vertex = $this->getVertex($this->_usedVertex);
+        $vertex->setTo($this->_minToVertex);
 
-        $this->pathSum = $this->minWeight;
-        $this->usedVertex = $this->minToVertex;
+        $this->_pathSum = $this->_minWeight;
+        $this->_usedVertex = $this->_minToVertex;
 
-        $this->minWeight = 0;
-        $this->minToVertex = 0;
+        $this->_minWeight = 0;
+        $this->_minToVertex = 0;
 
-        return $this->usedVertex;
+        return $this->_usedVertex;
     }
 
     /**
@@ -85,7 +85,7 @@ class Vertices implements VerticesInterface
      */
     public function isNotSetWeight(): bool
     {
-        for ($i = 0; $i < count($this->vertices); $i++) {
+        for ($i = 0; $i < count($this->_vertices); $i++) {
             if ($this->getVertex($i)->getWeight() == -1) {
                 return true;
             }
@@ -99,12 +99,12 @@ class Vertices implements VerticesInterface
      */
     public function isZeroWeight(GraphInterface $graph, $i): bool
     {
-        $weight = $graph->getGraph()[$this->usedVertex][$i];
+        $weight = $graph->getGraph()[$this->_usedVertex][$i];
         if (!is_int($weight)) {
             throw new VertexGraphException("Edge weight must be int.");
         }
 
-        if ($graph->getGraph()[$this->usedVertex][$i] <= 0) {
+        if ($graph->getGraph()[$this->_usedVertex][$i] <= 0) {
             return true;
         }
 
@@ -116,7 +116,7 @@ class Vertices implements VerticesInterface
      */
     public function getVertices(): array
     {
-        return $this->vertices;
+        return $this->_vertices;
     }
 
     /**
@@ -126,6 +126,6 @@ class Vertices implements VerticesInterface
      */
     private function getVertex(int $i): Vertex
     {
-        return $this->vertices[$i];
+        return $this->_vertices[$i];
     }
 }

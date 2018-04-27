@@ -19,5 +19,9 @@ interface ControllerInterface
      *
      * @throws GraphException
      */
-    public function execute(GraphInterface $graph, VerticesInterface $vertices, EdgeInterface $edge): ResponseInterface;
+    public function execute(
+        GraphInterface $graph,
+        VerticesInterface $vertices,
+        EdgeInterface $edge
+    ): ResponseInterface;
 }

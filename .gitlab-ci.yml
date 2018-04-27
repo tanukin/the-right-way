@@ -2,7 +2,7 @@ image: php:7.1
 
 before_script:
   - whoami
-  - composer --version
+  - curl -sS http://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer
   - composer install
 
 stages:

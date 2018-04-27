@@ -1,6 +1,7 @@
 image: php:7.1
 
 before_script:
+  - apt-get install git -y
   - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
   - php composer-setup.php --install-dir=/usr/local/bin --filename=composer
   - composer install --dev

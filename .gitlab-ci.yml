@@ -1,4 +1,4 @@
-images: php:7.1
+image: php:7.1
 
 before_script:
   - whoami
@@ -6,13 +6,13 @@ before_script:
   - composer install
 
 stages:
-  deploy
+  - deploy
 
 phpcs:
   stage: deploy
   script:
     - echo "Start code sniffer..."
-    - vendor/bin/phpcs src/
+    - ./vendor/bin/phpcs src/
   when: always
   only:
     - code-review
@@ -21,7 +21,7 @@ phpcpd:
   stage: deploy
   script:
     - echo "Start copy/paste detector..."
-    - /vendor/bin/phpcpd src/
+    - ./vendor/bin/phpcpd src/
   when: always
   only:
     - code-review

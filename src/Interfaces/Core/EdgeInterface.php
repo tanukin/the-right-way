@@ -1,16 +1,16 @@
 <?php
 
-namespace Algorithm\Interfaces;
+namespace Algorithm\Interfaces\Core;
 
-use Algorithm\Exceptions\EdgeGraphException;
+use Algorithm\Exceptions\GraphException;
 
 interface EdgeInterface
 {
     /**
      * @param VerticesInterface $vertices
-     * @param array $edge
+     * @param array             $edge
      *
-     * @throws EdgeGraphException
+     * @throws GraphException
      */
     public function setDataEdge(VerticesInterface $vertices, array $edge);
 }

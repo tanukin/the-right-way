@@ -1,15 +1,27 @@
 <?php
 
-namespace Algorithm\Interfaces;
+namespace Algorithm\Interfaces\Core;
 
-use Algorithm\Exceptions\VertexGraphException;
+use Algorithm\Exceptions\GraphException;
 
 interface VerticesInterface
 {
+    /**
+     * @param int $from
+     * @param int $weight
+     *
+     * @return VerticesInterface
+     */
     public function setWeightVertices(int $from, int $weight): VerticesInterface;
 
+    /**
+     * @return int
+     */
     public function getNextVertex(): int;
 
+    /**
+     * @return bool
+     */
     public function isNotSetWeight(): bool;
 
     /**
@@ -18,9 +30,12 @@ interface VerticesInterface
      *
      * @return bool
      *
-     * @throws VertexGraphException
+     * @throws GraphException
      */
     public function isZeroWeight(GraphInterface $graph, $i): bool;
 
-    public function echoVertices(): string;
+    /**
+     * @return array
+     */
+    public function getVertices(): array;
 }

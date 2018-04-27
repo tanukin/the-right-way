@@ -14,7 +14,7 @@ phpcs:
   stage: deploy
   script:
     - echo "Start code sniffer..."
-    - ./vendor/bin/phpcs src/
+    - ./vendor/bin/phpcs --standard=Zend  src/
   when: always
   only:
     - code-review

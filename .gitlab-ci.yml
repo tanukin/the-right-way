@@ -28,3 +28,13 @@ phpcpd:
   only:
     - code-review
 
+deploy_to_heroku:
+  type: deploy
+  script:
+  - gem install dpl
+  - dpl --provider=heroku --app=right-way --api-key=$HEROKU_STAGING_API_KEY
+  when: manual
+  only:
+  - master
+
+

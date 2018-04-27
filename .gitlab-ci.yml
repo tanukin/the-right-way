@@ -1,11 +1,9 @@
 image: php:7.1
 
 before_script:
-  - whoami
-  - apt-get update -y
-  - apt-get install git -y
-  - curl -sS http://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer
-  - composer install --no-plugins --no-scripts
+  - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+  - php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+  - composer install --dev
 
 stages:
   - deploy

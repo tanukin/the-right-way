@@ -1,0 +1,28 @@
+images: php:7.1
+
+before_script:
+  - whoami
+  - composer --version
+  - composer install
+
+stages:
+  deploy
+
+phpcs:
+  stage: deploy
+  script:
+    - echo "Start code sniffer..."
+    - vendor/bin/phpcs src/
+  when: always
+  only:
+    - code-review
+
+phpcpd:
+  stage: deploy
+  script:
+    - echo "Start copy/paste detector..."
+    - /vendor/bin/phpcpd src/
+  when: always
+  only:
+    - code-review
+

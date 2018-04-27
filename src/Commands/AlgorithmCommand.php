@@ -2,19 +2,22 @@
 
 namespace Algorithm\Commands;
 
-use Algorithm\Edge\Edge;
+use Algorithm\Core\ControllerFactory;
+use Algorithm\Core\Edge;
+use Algorithm\Core\GraphJson;
+use Algorithm\Core\ResponseBuilder;
+use Algorithm\Core\Vertices;
+use Algorithm\Entities\Graph;
 use Algorithm\Exceptions\EmptyFileException;
 use Algorithm\Exceptions\FileException;
 use Algorithm\Exceptions\GraphException;
 use Algorithm\Exceptions\NotFoundFileException;
-use Algorithm\Graph\Graph;
-use Algorithm\Graph\GraphJson;
-use Algorithm\GraphService;
-use Algorithm\Vertices\Vertices;
+use Algorithm\Services\GraphService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 class AlgorithmCommand extends Command
 {
@@ -22,40 +25,51 @@ class AlgorithmCommand extends Command
     {
         $this
             ->setName('app:Dijkstra-algorithm')
-            ->setDescription('The Dijkstra algorithm finds the shortest path from one of the vertices of the graph to all the others.')
-            ->addArgument('filename', InputArgument::OPTIONAL, 'Enter filename with the extension');
+            ->setDescription(
+                'The Dijkstra algorithm finds the shortest path from one of the vertices of the graph to all the others.'
+            )
+            ->addArgument(
+                'filename',
+                InputArgument::OPTIONAL,
+                'Enter filename with the extension'
+            );
     }
 
     /**
-     * @param InputInterface $input
+     * @param InputInterface  $input
      * @param OutputInterface $output
      *
      * @return int|null|void
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $io = new SymfonyStyle($input, $output);
+
         try {
-            if (empty($input->getArgument('filename')))
+            if (empty($input->getArgument('filename'))) {
                 throw new FileException('No filename received.');
+            }
 
-            $graphJSON = new GraphJson($this->getContent($input->getArgument('filename')));
-            $graph = new Graph($graphJSON->decode());
-            $edge = new Edge();
-            $vertices = new Vertices($graph->countVertex());
+            $graphJson = new GraphJson();
+            $graphArray = $graphJson->decode($this->getContent($input->getArgument('filename')));
 
-            $algorithm = new GraphService($graph, $vertices, $edge);
-            $algorithm->run();
+            $controllerFactory = new ControllerFactory();
+            $controller = $controllerFactory->getController(new GraphService(), new ResponseBuilder());
 
-            $this->delimiter($output, 'Input graph:', $graph->echoGraph(), 'Result:', $vertices->echoVertices());
-
+            $response = $controller->execute(new Graph($graphArray), new Vertices(count($graphArray)), new Edge());
 
         } catch (GraphException $e) {
-            $this->delimiter($output, 'Input graph:', $graph->echoGraph(), 'ERROR! ' . $e->getMessage());
+            $io->error(sprintf('ERROR! %s', $e->getMessage()));
         } catch (FileException $e) {
-            $this->delimiter($output, 'ERROR! ' . $e->getMessage());
-        } catch (\Exception $e){
-            $this->delimiter($output, $e->getMessage());
+            $io->error(sprintf('ERROR! %s', $e->getMessage()));
+        } catch (\Exception $e) {
+            $io->error(sprintf('ERROR! %s', $e->getMessage()));
         }
+
+        $io->text("Input graph");
+        $io->table([], $graphArray);
+        $io->text("Result");
+        $io->text($response->getResponse());
     }
 
     /**
@@ -68,25 +82,13 @@ class AlgorithmCommand extends Command
      */
     protected function getContent(string $path): string
     {
-        if (!file_exists($path))
+        if (!file_exists($path)) {
             throw new NotFoundFileException('File ' . $path . ' not found');
+        }
         $content = file_get_contents($path);
-        if (empty($content))
+        if (empty($content)) {
             throw new EmptyFileException('Content is empty');
+        }
         return $content;
     }
-
-    /**
-     * @param OutputInterface $output
-     * @param array ...$args
-     */
-    protected function delimiter(OutputInterface $output, ...$args)
-    {
-        $output->writeln('--------------------------------');
-        foreach ($args as $item) {
-            $output->writeln($item);
-            $output->writeln('--------------------------------');
-        }
-    }
-
 }
